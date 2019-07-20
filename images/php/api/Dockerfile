@@ -1,4 +1,4 @@
-FROM php:7.3.7-stretch
+FROM php:7.2-fpm
 
 RUN apt-get update && apt-get install -y libmcrypt-dev libpq-dev zlib1g-dev libpng-dev libjpeg-dev ffmpeg unzip curl less \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \

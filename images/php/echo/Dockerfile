@@ -1,4 +1,4 @@
-FROM php:7.3.7-stretch
+FROM php:7.2-fpm
 
 RUN apt-get update && apt-get install -y build-essential curl git python libglib2.0-dev libmcrypt-dev libpq-dev \
     zlib1g-dev libpng-dev libjpeg-dev ffmpeg unzip curl less autoconf g++ make libfreetype6-dev \
