@@ -1,23 +1,22 @@
-FROM php:7.2-fpm
+FROM php:7.3.7-fpm-stretch
 
-RUN apt-get update && apt-get install -y build-essential curl git python libglib2.0-dev libmcrypt-dev libpq-dev \
-    zlib1g-dev libpng-dev libjpeg-dev ffmpeg unzip curl less autoconf g++ make libfreetype6-dev \
-    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-    && docker-php-ext-install pdo_pgsql pgsql bcmath zip gd
+RUN apt-get update \
+    && apt-get install -y \
+        build-essential curl git python ffmpeg unzip less autoconf g++ make nano cron rclone \
+        libglib2.0-dev libmcrypt-dev libpq-dev zlib1g-dev libpng-dev libjpeg-dev libfreetype6-dev
 
-RUN pecl install redis \
-    && docker-php-ext-enable redis
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-RUN apt-get install -y --no-install-recommends --no-install-suggests nano cron rclone
-
+RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
 RUN docker-php-ext-configure gd \
     --enable-gd-native-ttf \
     --with-jpeg-dir=/usr/lib \
     --with-freetype-dir=/usr/include/freetype2
 
-RUN docker-php-ext-install gd
+RUN docker-php-ext-install pdo_pgsql pgsql bcmath zip gd
+
+RUN pecl install redis \
+    && docker-php-ext-enable redis
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN cd /tmp \
     && git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git \
