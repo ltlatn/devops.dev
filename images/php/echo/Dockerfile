@@ -3,7 +3,7 @@ FROM php:7.3.7-fpm-stretch
 RUN apt-get update \
     && apt-get install -y \
         build-essential curl git python ffmpeg unzip less autoconf g++ make nano cron rclone \
-        libglib2.0-dev libmcrypt-dev libpq-dev zlib1g-dev libpng-dev libjpeg-dev libfreetype6-dev
+        libglib2.0-dev libmcrypt-dev libpq-dev zlib1g-dev libpng-dev libjpeg-dev libfreetype6-dev libzip-dev
 
 RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
 RUN docker-php-ext-configure gd \
