@@ -33,9 +33,9 @@ RUN cd /tmp \
     && cd out.gn/x64.release/obj \
     && ar rcsDT libv8_libplatform.a v8_libplatform/*.o
 
-RUN printf "\n" | pecl install v8js \
-    && echo 'extension=v8js.so' >> /usr/local/etc/php/conf.d/30-v8js.ini \
-    && kill -USR2 1
+#RUN printf "\n" | pecl install v8js \
+#    && echo 'extension=v8js.so' >> /usr/local/etc/php/conf.d/30-v8js.ini \
+#    && kill -USR2 1
 
 WORKDIR /var/www
 EXPOSE 9000
